@@ -1,1 +1,3 @@
-console.log("Hello World!");
+import App from './script/app.js';
+
+const app = new App(document.body);
