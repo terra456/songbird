@@ -10,18 +10,14 @@ class GamePage extends Control {
         this.questionNumber = 0;
         this.progressIndicator = new Control(this.node, 'div', '', `${this.questionNumber}`);
         this.scoreIndicator = new Control(this.node, 'div', '', `Score: ${this.score}`);
-        // const questions: Array<IArtistsQuestionData | IPicturesQuestionData> = questionsData;
-        // this.results = [];
-        // this.questionCycle(gameOptions.gameName, questions, 0, () => {
-        //     this.onFinish(this.results);
-        // })
         this.dataModel = new DataModel();
+        this.nextBtn = new Control(this.node, 'button', 'main__btn btn__next', 'Next question');
+        this.nextBtn.node.disabled = true;
         this.questionsCycle();
     }
 
     questionsCycle() {
         this.newQuestion(this.questionNumber);
-        this.nextBtn = new Control(this.node, 'button', 'main__btn btn__next', 'Next question');
         this.nextBtn.node.onclick = () => {
             this.questionNumber++;
             this.questionField.destroy();
@@ -31,25 +27,31 @@ class GamePage extends Control {
                 this.newQuestion(this.questionNumber);
             }
         }
-        // this.nextBtn.disable = true;
     }
 
     newQuestion(number) {
         let attempt = 0;
+        this.nextBtn.node.disabled = true;
         this.questionField = new Control(this.node, 'div', 'main__question');
         const questionData = this.dataModel.getQuestionData(number);
-        const question = new BirdField(this.questionField.node, questionData.songUrl, questionData.correctName);
+        const question = new BirdField(this.questionField.node, '*****', questionData.songUrl);
         const answers = new Control(this.questionField.node, 'ul', 'main__answers answers__list', 'Select me');
+        let birdNode = new Control(this.questionField.node, 'div', 'bird__data', 'Послушайте плеер. Выберите птицу из списка');
         questionData.answers.forEach((el, i) => {
             const answer = new Control(answers.node, 'li', 'main__answer answers__item', el);
             answer.node.onclick = () => {
+                birdNode.destroy();
+                const birdObj = this.dataModel.getBirdDataByName(el);
+                birdNode = new BirdField(this.questionField.node, birdObj.name, birdObj.audio, birdObj.image, birdObj.description, birdObj.species);
                 if (i === questionData.correctAnswerIndex) {
                     answer.node.classList.add('answers__item--correct');
+                    question.changeName(questionData.correctName);
+                    question.showImage(birdObj.image);
                     if (attempt < 6) {
                         this.score += (5 - attempt);
                         this.scoreIndicator.node.textContent = `Score: ${this.score}`;
                     }
-                    // this.nextBtn.disable = true;
+                    this.nextBtn.node.disabled = false;
                 } else {
                     attempt++;
                     answer.node.classList.add('answers__item--incorrect');
@@ -57,7 +59,7 @@ class GamePage extends Control {
                 }
             }
         })
-        const description = new Control(this.questionField.node, 'div', 'main__description', this.name);
+        
     }
 
     finishGame() {

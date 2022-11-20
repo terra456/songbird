@@ -3,18 +3,30 @@ import AudioPlayer from "./audioPlayer";
 
 class BirdField extends Control {
     
-    constructor(parentNode, audioUrl, name) {
+    constructor(parentNode, birdName, audioUrl, imgUrl = './assets/img/bird.jpg', desc, latName) {
         super(parentNode, 'div', 'bird__data');
         this.audio = audioUrl;
-        this.birdName = name;
-        this.render();
+        this.birdName = birdName;
+        this.nameNode = new Control(this.node, 'h3', 'bird__header', this.birdName);
+        this.image = new Control(this.node, 'img', 'bird__img');
+        this.image.node.src = imgUrl;
+        this.audioPlayer = new AudioPlayer(this.node, this.audio);
+        if (desc && latName) {
+            const latNameNode = new Control(this.node, 'h4', 'bird__header--small', latName);
+            const descNode = new Control(this.node, 'p', 'bird__desc', desc);
+        }
     }
 
-    render() {
-        // const img = new Control(this.node, 'img', 'bird__img');
-        // img.src = data.imgUrl;
-        const name = new Control(this.node, 'h3', 'bird__header', this.birdName);
-        const audioPlayer = new AudioPlayer(this.node, this.audio);
+    showImage(imgUrl) {
+        this.image.node.src = imgUrl;
+    }
+
+    changeName(name) {
+        this.nameNode.node.textContent = name;
+    }
+
+    playAudio() {
+        this.audioPlayer.timeStart();
     }
 
 }
