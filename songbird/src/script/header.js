@@ -8,11 +8,11 @@ export class Header extends Control {
         const gameBtn = new Control(this.node, 'button', '', 'Start Game');
         gameBtn.node.onclick = () => this.onGameStart();
 
-        // const artistsBtn = new Control(this.node, 'button', '', 'artists');
-        // artistsBtn.node.onclick = () => this.onGameSelect('artists');
-
-        // const settingsBtn = new Control(this.node, 'button', '', 'settings');
-        // settingsBtn.node.onclick = () => this.onSettings();
+        ['Городские птицы', 'Врановые', 'Лесные птицы', 'Певчие птицы', 'Хищные птицы', 'Морские птицы']
+        .forEach((el, i) => {
+            const categoryBtn = new Control(this.node, 'button', '', el);
+            categoryBtn.node.onclick = () => this.onCategory(el, i);
+        })
     }
 }
 

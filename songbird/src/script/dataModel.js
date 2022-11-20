@@ -28,6 +28,10 @@ class DataModel {
     getBirdDataByName(name) {
         return this.birdsData.flat().find((el) => el.name === name);
     }
+
+    getCategory(ind) {
+        return this.birdsData[ind];
+    }
 }
 
 export default DataModel;

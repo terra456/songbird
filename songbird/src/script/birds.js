@@ -77,18 +77,18 @@ const birdsData = [
     },
     {
       id: 4,
-      name: 'Певчий дрозд',
-      species: 'Turdus philomelos',
-      description: 'Дрозд — лучший певец из отряда воробьиных. Песня состоит только из красивых звучных свистов и коротких трелей. Чаще всего её можно услышать в утреннее и вечернее время. Поют дрозды в течении всего периода гнездования.',
+      name: 'Серая ворона',
+      species: 'Corvus cornix',
+      description: 'Голова, крылья и хвост чёрные, туловище серое. Средняя длина — 50 сантиметров, масса тела 460—735 граммов, размах крыльев — до 1 метра. Голос — разные модификации карканья, наиболее частый сигнал — хриплое «карр» с закрытым звуком в конце.',
       image: 'https://live.staticflickr.com/65535/48979125763_e2534f54bd.jpg',
-      audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513326-190704_1146_TF-Glogow.mp3'
+      audio: 'https://www.xeno-canto.org/sounds/uploaded/LELYWQKUZX/XC432458-Corvus%20corax%200531_095758%2CAAA.MP3'
     },
     {
       id: 5,
       name: 'Сорока',
       species: 'Pica pica',
       description: 'Сорока очень трудолюбивая птица. Она строит до восьми гнёзд, а потом выбирает из них самое лучшее. Вход в гнездо сорок всегда обращен на юг, чтобы в жилище было теплее. Сороки являются единственными птицами, которые узнают себя в зеркале.',
-      image: 'https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Corneille_mantel%C3%A9e_-_Hooded_crow_-_Gri_le%C5%9F_kargas%C4%B1_03.jpg/1920px-Corneille_mantel%C3%A9e_-_Hooded_crow_-_Gri_le%C5%9F_kargas%C4%B1_03.jpg',
       audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC500868-Pica%20pica2019.08.23_09.18_02.mp3'
     },
     {
