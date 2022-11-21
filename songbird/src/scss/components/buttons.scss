@@ -1,0 +1,29 @@
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn__nav {
+    padding: 10px 15px;
+    background-color: $second-color;
+    font-family: $main-font;
+    font-size: 1em;
+
+    &:hover {
+        background-color: adjust-hue($color: $second-color, $degrees: 10);
+    }
+
+    &:first-child {
+        border-radius: 5px 0px 0px 5px;
+    }
+
+    &:last-child {
+        border-radius: 0px 5px 5px 0px;
+    }
+}

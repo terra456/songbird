@@ -8,10 +8,9 @@ class GamePage extends Control {
         super(parentNode, 'main', 'main');
         this.score = 0;
         this.questionNumber = 0;
-        this.progressIndicator = new Control(this.node, 'div', '', `${this.questionNumber}`);
-        this.scoreIndicator = new Control(this.node, 'div', '', `Score: ${this.score}`);
+        this.scoreIndicator = new Control(this.node, 'div', 'main__score', `Score: ${this.score}`);
         this.dataModel = new DataModel();
-        this.nextBtn = new Control(this.node, 'button', 'main__btn btn__next', 'Next question');
+        this.nextBtn = new Control(this.node, 'button', 'main__btn btn__nav', 'Next question');
         this.nextBtn.node.disabled = true;
         this.questionsCycle();
     }
@@ -35,7 +34,7 @@ class GamePage extends Control {
         this.questionField = new Control(this.node, 'div', 'main__question');
         const questionData = this.dataModel.getQuestionData(number);
         const question = new BirdField(this.questionField.node, '*****', questionData.songUrl);
-        const answers = new Control(this.questionField.node, 'ul', 'main__answers answers__list', 'Select me');
+        const answers = new Control(this.questionField.node, 'ul', 'main__answers answers__list');
         let birdNode = new Control(this.questionField.node, 'div', 'bird__data', 'Послушайте плеер. Выберите птицу из списка');
         questionData.answers.forEach((el, i) => {
             const answer = new Control(answers.node, 'li', 'main__answer answers__item', el);

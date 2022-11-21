@@ -6,13 +6,13 @@ import CategoryPage from './categoryPage';
 class App extends Control {
 
     constructor(parentNode) {
-        super(parentNode);
+        super(parentNode, 'div', 'main__wrapper');
         this.mainCycle();
         this.gameCycle();
     }
 
     gameCycle() {
-        this.gamePage = new GamePage(this.node, 'gmewkirfjwerfkdqw');
+        this.gamePage = new GamePage(this.node);
     }
 
     categoryCycle(categoryName, categoryInd) {

@@ -1,0 +1,34 @@
+.answers {
+    &__list {
+        list-style: none;
+    }
+
+    &__item {
+        position: relative;
+        margin: 15px 0px;
+        padding-left: 30px;
+
+        &:hover {
+            cursor: pointer;
+            color: $second-color;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+        }
+
+        &--correct::before {
+            background-color: green;
+        }
+
+        &--incorrect::before {
+            background-color: red;
+        }
+    }
+}

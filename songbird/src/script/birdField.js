@@ -4,7 +4,7 @@ import AudioPlayer from "./audioPlayer";
 class BirdField extends Control {
     
     constructor(parentNode, birdName, audioUrl, imgUrl = './assets/img/bird.jpg', desc, latName) {
-        super(parentNode, 'div', 'bird__data');
+        super(parentNode, 'div', 'bird');
         this.audio = audioUrl;
         this.birdName = birdName;
         this.nameNode = new Control(this.node, 'h3', 'bird__header', this.birdName);
