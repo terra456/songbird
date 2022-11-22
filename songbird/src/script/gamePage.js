@@ -38,6 +38,9 @@ class GamePage extends Control {
         this.questionField = new Control(this.node, 'div', 'main__question');
         const questionData = this.dataModel.getQuestionData(number);
         const question = new BirdField(this.questionField.node, '*****', questionData.songUrl);
+        question.birdPlay = () => {
+            question.playAudio();
+        }
         const answers = new Control(this.questionField.node, 'ul', 'main__answers answers__list');
         let birdNode = new Control(this.questionField.node, 'div', 'bird__data', 'Послушайте плеер. Выберите птицу из списка');
         questionData.answers.forEach((el, i) => {
@@ -46,7 +49,14 @@ class GamePage extends Control {
                 birdNode.destroy();
                 const birdObj = this.dataModel.getBirdDataByName(el);
                 birdNode = new BirdField(this.questionField.node, birdObj.name, birdObj.audio, birdObj.image, birdObj.description, birdObj.species);
+                birdNode.birdPlay = () => {
+                    if (!question.audioPlayer.audio.paused) {
+                        question.audioPlayer.timePaused();
+                    }
+                    birdNode.playAudio();
+                }
                 if (i === questionData.correctAnswerIndex) {
+                    question.stopAudio();
                     answer.node.classList.add('answers__item--correct');
                     question.changeName(questionData.correctName);
                     question.showImage(birdObj.image);

@@ -13,7 +13,7 @@ class BirdField extends Control {
         this.audioPlayer = new AudioPlayer(this.node, this.audio);
         this.audioPlayer.onPlay = () => {
             this.birdPlay();
-            this.audioPlayer.playAudio();
+            // this.audioPlayer.playAudio();
         };
         if (desc && latName) {
             const latNameNode = new Control(this.node, 'h4', 'bird__header--small', latName);
@@ -31,6 +31,10 @@ class BirdField extends Control {
 
     stopAudio() {
         this.audioPlayer.timeStop();
+    }
+
+    playAudio() {
+        this.audioPlayer.playAudio();
     }
 
 }
