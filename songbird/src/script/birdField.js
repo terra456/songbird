@@ -3,7 +3,7 @@ import AudioPlayer from "./audioPlayer";
 
 class BirdField extends Control {
     
-    constructor(parentNode, birdName, audioUrl, imgUrl = './assets/img/bird.jpg', desc, latName) {
+    constructor(parentNode, birdName, audioUrl, imgUrl = 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg', desc, latName) {
         super(parentNode, 'div', 'bird');
         this.audio = audioUrl;
         this.birdName = birdName;

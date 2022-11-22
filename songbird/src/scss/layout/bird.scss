@@ -4,6 +4,7 @@
 
     &__header {
         font-size: 2rem;
+        box-sizing: content-box;
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 1;
@@ -20,7 +21,10 @@
     }
 
     &__img {
+        display: block;
         width: 100%;
+        height: 100%;
+        object-fit: contain;
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -28,11 +32,10 @@
     }
 
     & .player {
-        width: 40%;
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
     }
 
     &__desc {

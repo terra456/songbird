@@ -1,32 +1,42 @@
-.player__btn {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border: 2px solid $main-color;
-    border-radius: 50%;
+.player {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
 
-    &--play {
-        &::before {
-            content: '';
-            position: absolute;
-            left: 13px;
-            top: 9px;
-            border: 10px solid transparent;
-            border-left: 13px solid $second-color;
+    &__btn {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        box-sizing: border-box;
+        border: 2px solid $main-color;
+        border-radius: 50%;
+        flex-shrink: 0;
+    
+        &--play {
+            &::before {
+                content: '';
+                position: absolute;
+                left: 13px;
+                top: 9px;
+                border: 10px solid transparent;
+                border-left: 13px solid $second-color;
+            }
         }
-    }
-
-
-    &--pause {
-        &::before {
-            content: '';
-            position: absolute;
-            height: 15px;
-            width: 5px;
-            left: 13px;
-            top: 10px;
-            border-left: 3px solid $second-color;
-            border-right: 3px solid $second-color;
+    
+    
+        &--pause {
+            &::before {
+                content: '';
+                position: absolute;
+                height: 15px;
+                width: 5px;
+                left: 13px;
+                top: 10px;
+                border-left: 3px solid $second-color;
+                border-right: 3px solid $second-color;
+            }
         }
     }
 }
