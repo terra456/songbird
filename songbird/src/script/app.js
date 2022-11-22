@@ -8,11 +8,10 @@ class App extends Control {
     constructor(parentNode) {
         super(parentNode, 'div', 'main__wrapper');
         this.mainCycle();
-        this.gameCycle();
     }
 
-    gameCycle() {
-        this.gamePage = new GamePage(this.node);
+    gameCycle(nodes) {
+        this.gamePage = new GamePage(this.node, nodes);
     }
 
     categoryCycle(categoryName, categoryInd) {
@@ -21,14 +20,18 @@ class App extends Control {
 
     mainCycle() {
         const header = new Header(this.node);
-        header.onGameStart = () => {
-            console.log('start');
+        this.gamePage = new GamePage(this.node, header.levels);
+        header.onGallery = () => {
             this.gamePage.destroy();
-            this.gameCycle();
-        }
-        header.onCategory = (categoryName, categoryInd) => {
-            this.gamePage.destroy();
-            this.categoryCycle(categoryName, categoryInd);
+            if (header.isGame) {
+                this.categoryCycle();
+                header.isGame = false;
+                header.galleryBtn.node.textContent = 'Start Game';
+            } else {
+                this.gameCycle(header.getLevelNodes());
+                header.isGame = true;
+                header.galleryBtn.node.textContent = 'Learn Birds';
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ import DataModel from "./dataModel";
 
 class CategoryPage extends Control {
     
-    constructor(parentNode, name, ind) {
+    constructor(parentNode, name = '', ind = 0) {
         super(parentNode, 'main', 'main');
         this.dataModel = new DataModel();
         const header = new Control(this.node, 'h2', 'main__header', name);

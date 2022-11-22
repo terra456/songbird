@@ -10,29 +10,27 @@ class AudioPlayer extends Control {
         this.audio = document.createElement('audio');
         this.audio.src = audioUrl;
         this.audio.onloadeddata = () => {
-            console.log(this.audio.duration);
             this.time = Math.floor(this.audio.duration);
-            this.timerPanel = new Timer(this.node, this.time, this.node.scrollWidth);
+            this.timerPanel = new Timer(this.node, this.time, this.node.scrollWidth - 40);
         };
         this.node.appendChild(this.audio);
-        this.render();
+        this.playBtn = new Control(this.node, 'button', 'player__btn player__btn--play');
+        this.playBtn.node.onclick = () => {
+            this.onPlay();
+        }
     }
-    
-    render() {
-        const playBtn = new Control(this.node, 'button', 'player__btn player__btn--play');
-        playBtn.node.onclick = () => {
-            console.log(this.node.scrollWidth);
-            playBtn.node.classList.toggle('player__btn--play');
-            playBtn.node.classList.toggle('player__btn--pause');
-            if (this.audio.paused) {
-                this.timeStart();
-            } else {
-                this.timePaused();
-            }
+
+    playAudio() {
+        if (this.audio.paused) {
+            this.timeStart();
+        } else {
+            this.timePaused();
         }
     }
 
     timeStart() {
+        this.playBtn.node.classList.toggle('player__btn--play');
+        this.playBtn.node.classList.toggle('player__btn--pause');
         this.audio.currentTime = this.currentTime;
         this.timer = window.setInterval(() => {
             this.currentTime++;
@@ -45,14 +43,19 @@ class AudioPlayer extends Control {
     }
 
     timePaused() {
+        this.playBtn.node.classList.toggle('player__btn--play');
+        this.playBtn.node.classList.toggle('player__btn--pause');
         window.clearInterval(this.timer);
         this.audio.pause();
     }
 
     timeStop() {
+        this.playBtn.node.classList.toggle('player__btn--play');
+        this.playBtn.node.classList.toggle('player__btn--pause');
         this.currentTime = 0;
         clearInterval(this.timer);
         this.audio.pause();
+        this.timerPanel.move(0);
     }
 
 }

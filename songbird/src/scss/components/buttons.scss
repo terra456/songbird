@@ -15,10 +15,6 @@ button {
     font-family: $main-font;
     font-size: 1em;
 
-    &:hover {
-        background-color: adjust-hue($color: $second-color, $degrees: 10);
-    }
-
     &:first-child {
         border-radius: 5px 0px 0px 5px;
     }
@@ -26,4 +22,12 @@ button {
     &:last-child {
         border-radius: 0px 5px 5px 0px;
     }
+
+    &.complete {
+        opacity: 0.8;
+    }
+}
+
+.btn:hover {
+    background-color: adjust-hue($color: $second-color, $degrees: 10);
 }

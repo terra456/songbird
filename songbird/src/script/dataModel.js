@@ -30,7 +30,7 @@ class DataModel {
     }
 
     getCategory(ind) {
-        return this.birdsData[ind];
+        return ind ? this.birdsData[ind] : this.birdsData.flat();
     }
 }
 

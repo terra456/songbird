@@ -4,13 +4,15 @@ import DataModel from "./dataModel";
 
 class GamePage extends Control {
     
-    constructor(parentNode) {
+    constructor(parentNode, levelNodes) {
         super(parentNode, 'main', 'main');
         this.score = 0;
         this.questionNumber = 0;
+        this.isGetRightAnswer = false;
+        this.levelNodes = levelNodes;
         this.scoreIndicator = new Control(this.node, 'div', 'main__score', `Score: ${this.score}`);
         this.dataModel = new DataModel();
-        this.nextBtn = new Control(this.node, 'button', 'main__btn btn__nav', 'Next question');
+        this.nextBtn = new Control(this.node, 'button', 'btn main__btn btn__nav', 'Next question');
         this.nextBtn.node.disabled = true;
         this.questionsCycle();
     }
@@ -18,9 +20,10 @@ class GamePage extends Control {
     questionsCycle() {
         this.newQuestion(this.questionNumber);
         this.nextBtn.node.onclick = () => {
+            this.levelNodes[this.questionNumber].node.classList.add('complete');
             this.questionNumber++;
             this.questionField.destroy();
-            if (this.questionNumber >= 5) {
+            if (this.questionNumber > 5) {
                 this.finishGame();
             } else {
                 this.newQuestion(this.questionNumber);
@@ -30,6 +33,7 @@ class GamePage extends Control {
 
     newQuestion(number) {
         let attempt = 0;
+        this.isGetRightAnswer = false;
         this.nextBtn.node.disabled = true;
         this.questionField = new Control(this.node, 'div', 'main__question');
         const questionData = this.dataModel.getQuestionData(number);
@@ -51,10 +55,12 @@ class GamePage extends Control {
                         this.scoreIndicator.node.textContent = `Score: ${this.score}`;
                     }
                     this.nextBtn.node.disabled = false;
+                    this.isGetRightAnswer = true;
                 } else {
-                    attempt++;
-                    answer.node.classList.add('answers__item--incorrect');
-                    console.log(attempt);
+                    if (!this.isGetRightAnswer) {
+                        attempt++;
+                        answer.node.classList.add('answers__item--incorrect');
+                    }
                 }
             }
         })
@@ -63,6 +69,7 @@ class GamePage extends Control {
 
     finishGame() {
         this.questionField = new Control(this.node, 'div', 'main__question', `Вы набрали ${this.score} из 30`);
+        this.levelNodes.forEach((el) => el.node.classList.remove('complete'));
         this.questionNumber = 0;
     }
 
