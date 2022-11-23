@@ -18,7 +18,6 @@ export class Header extends Control {
     }
 
     getLevelNodes() {
-        console.log(this.levels);
         return this.levels;
     }
 }

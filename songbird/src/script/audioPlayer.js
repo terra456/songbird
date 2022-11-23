@@ -21,7 +21,6 @@ class AudioPlayer extends Control {
     }
 
     playAudio() {
-        console.log(this.audio.paused);
         if (this.audio.paused) {
             this.timeStart();
         } else {

@@ -14,24 +14,34 @@ class GamePage extends Control {
         this.dataModel = new DataModel();
         this.nextBtn = new Control(this.node, 'button', 'btn main__btn btn__nav', 'Next question');
         this.nextBtn.node.disabled = true;
+        this.correctAudio = new Audio('./assets/sounds/correct.mp3');
+        this.errorAudio = new Audio('./assets/sounds/error.mp3');
         this.questionsCycle();
     }
 
     questionsCycle() {
         this.newQuestion(this.questionNumber);
+        this.nextBtn.node.innerText = 'Next question';
         this.nextBtn.node.onclick = () => {
             this.levelNodes[this.questionNumber].node.classList.add('complete');
-            this.questionNumber++;
             this.questionField.destroy();
-            if (this.questionNumber > 5) {
-                this.finishGame();
+            if (this.questionNumber >= 5) {
+                this.questionField = new Control(this.node, 'div', 'main__question', `Вы набрали ${this.score} из 30`);
+                this.nextBtn.node.innerText = 'New Game';
+                if (!this.isGetRightAnswer) {
+                    this.finishGame();
+                } else {
+                    this.isGetRightAnswer = false;
+                }
             } else {
+                this.questionNumber++;
                 this.newQuestion(this.questionNumber);
             }
         }
     }
 
     newQuestion(number) {
+        this.scoreIndicator.node.textContent = `Score: ${this.score}`;
         let attempt = 0;
         this.isGetRightAnswer = false;
         this.nextBtn.node.disabled = true;
@@ -55,20 +65,22 @@ class GamePage extends Control {
                     }
                     birdNode.playAudio();
                 }
-                if (i === questionData.correctAnswerIndex) {
-                    question.stopAudio();
-                    answer.node.classList.add('answers__item--correct');
-                    question.changeName(questionData.correctName);
-                    question.showImage(birdObj.image);
-                    if (attempt < 6) {
-                        this.score += (5 - attempt);
-                        this.scoreIndicator.node.textContent = `Score: ${this.score}`;
-                    }
-                    this.nextBtn.node.disabled = false;
-                    this.isGetRightAnswer = true;
-                } else {
-                    if (!this.isGetRightAnswer) {
+                if (!this.isGetRightAnswer) {
+                    if (i === questionData.correctAnswerIndex) {
+                        question.stopAudio();
+                        this.isGetRightAnswer = true;
+                        this.correctAudio.play();
+                        answer.node.classList.add('answers__item--correct');
+                        question.changeName(questionData.correctName);
+                        question.showImage(birdObj.image);
+                        this.nextBtn.node.disabled = false;
+                        if (attempt < 6) {
+                            this.score += (5 - attempt);
+                            this.scoreIndicator.node.textContent = `Score: ${this.score}`;
+                        }
+                    } else {
                         attempt++;
+                        this.errorAudio.play();
                         answer.node.classList.add('answers__item--incorrect');
                     }
                 }
@@ -76,13 +88,6 @@ class GamePage extends Control {
         })
         
     }
-
-    finishGame() {
-        this.questionField = new Control(this.node, 'div', 'main__question', `Вы набрали ${this.score} из 30`);
-        this.levelNodes.forEach((el) => el.node.classList.remove('complete'));
-        this.questionNumber = 0;
-    }
-
 }
 
 export default GamePage;

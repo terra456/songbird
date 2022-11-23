@@ -3,7 +3,6 @@ import birdsData from './birds';
 class DataModel {
     constructor() {
         this.birdsData = birdsData;
-        console.log(this.birdsData);
     }
 
     getQuestionData(questionNumber) {

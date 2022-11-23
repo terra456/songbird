@@ -12,6 +12,11 @@ class App extends Control {
 
     gameCycle(nodes) {
         this.gamePage = new GamePage(this.node, nodes);
+        this.gamePage.finishGame = () => {
+            nodes.forEach((el) => el.node.classList.remove('complete'));
+            this.gamePage.destroy();
+            this.gameCycle(nodes);
+        }
     }
 
     categoryCycle(categoryName, categoryInd) {
@@ -20,7 +25,7 @@ class App extends Control {
 
     mainCycle() {
         const header = new Header(this.node);
-        this.gamePage = new GamePage(this.node, header.levels);
+        this.gameCycle(header.levels);
         header.onGallery = () => {
             this.gamePage.destroy();
             if (header.isGame) {
