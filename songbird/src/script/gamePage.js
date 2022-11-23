@@ -67,7 +67,9 @@ class GamePage extends Control {
                 }
                 if (!this.isGetRightAnswer) {
                     if (i === questionData.correctAnswerIndex) {
-                        question.stopAudio();
+                        if (!question.audioPlayer.audio.paused) {
+                            question.stopAudio();
+                        }
                         this.isGetRightAnswer = true;
                         this.correctAudio.play();
                         answer.node.classList.add('answers__item--correct');
