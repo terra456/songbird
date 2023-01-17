@@ -38,6 +38,19 @@ class App extends Control {
                 header.galleryBtn.node.textContent = 'Learn Birds';
             }
         }
+        // this.getData();
+    }
+
+    getData() {
+        // const requestOptions = {
+        //     method: 'GET',
+        //     redirect: 'follow'
+        //   };
+          
+        //   fetch("https://api.ebird.org/v2/product/spplist/Russia", requestOptions)
+        //     .then(response => response.text())
+        //     .then(result => console.log(result))
+        //     .catch(error => console.log('error', error));
     }
 }
 
